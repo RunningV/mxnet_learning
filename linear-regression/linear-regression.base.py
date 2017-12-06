@@ -86,7 +86,7 @@ for e in range(epochs):
 
 		est_loss = moving_loss / (1 - (1 - smoothing_constant)**niter)
 
-		if(niter+1)%100:
+		if(niter+1)%100 == 0:
 			losses.append(est_loss)
 			print('Epoch %s, batch %s, Moving avg of loss: %s, Average loss: %f'%(e, niter, est_loss, total_loss/num_examples))
 			plot(losses, x)
