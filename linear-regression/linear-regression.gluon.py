@@ -59,7 +59,6 @@ for e in range(epochs):
 			loss = square_loss(output, label)
 		loss.backward()
 		trainer.step(batch_size)
-    # total_loss += 
-    nd.sum(loss).asscalar()
-  # print("Epoch %d, average loss: %f" % (e, total_loss/num_examples))
+		total_loss += nd.sum(loss).asscalar()
+		print("Epoch %d, average loss: %f" % (e, total_loss/num_examples))
 
