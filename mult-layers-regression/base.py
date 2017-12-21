@@ -19,20 +19,20 @@ num_outputs = 10
 
 num_hidden = 256
 num_hidden10 = 512
-weight_scale1 = 0.5
-weight_scale10 = 0.1
-weight_scale2 = 0.01
+weight_scale1 = 0.2
+weight_scale10 = 0.3
+weight_scale2 = 0.5
 
 w1 = nd.random_normal(shape=(num_inputs, num_hidden), scale=weight_scale1)
 b1 = nd.zeros(num_hidden)
 
-w10 = nd.random_normal(shape=(num_hidden, num_hidden10), scale=weight_scale10)
-b10 = nd.zeros(num_hidden10)
+# w10 = nd.random_normal(shape=(num_hidden, num_hidden10), scale=weight_scale10)
+# b10 = nd.zeros(num_hidden10)
 
-w2 = nd.random_normal(shape=(num_hidden10, num_outputs), scale=weight_scale2)
+w2 = nd.random_normal(shape=(num_hidden, num_outputs), scale=weight_scale2)
 b2 = nd.zeros(num_outputs)
 
-params = [w1, b1, w10, b10, w2, b2]
+params = [w1, b1, w2, b2]
 
 for p in params:
 	p.attach_grad()
@@ -43,8 +43,8 @@ def relu(x):
 def net(x):
  	x = x.reshape((-1, num_inputs))
  	h1 = relu(nd.dot(x, w1) + b1)
- 	h10 = relu(nd.dot(h1, w10) + b10)
- 	output = nd.dot(h10, w2) + b2
+ 	# h10 = relu(nd.dot(h1, w10) + b10)
+ 	output = nd.dot(h1, w2) + b2
  	return output
 
 def cross_entropy(y_, y):

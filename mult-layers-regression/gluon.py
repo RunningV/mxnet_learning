@@ -19,9 +19,9 @@ num_outputs = 10
 
 num_hidden = 256
 num_hidden10 = 512
-weight_scale1 = 0.5
-weight_scale10 = 0.1
-weight_scale2 = 0.01
+weight_scale1 = 0.2
+weight_scale10 = 0.4
+weight_scale2 = 0.6
 
 w1 = nd.random_normal(shape=(num_inputs, num_hidden), scale=weight_scale1)
 b1 = nd.zeros(num_hidden)
@@ -43,7 +43,8 @@ def relu(x):
 net = gluon.nn.Sequential()
 with net.name_scope():
 	net.add(gluon.nn.Flatten())
-	net.add(gluon.nn.Dense(256, activation='softrelu'))
+	net.add(gluon.nn.Dense(256, activation='relu'))
+	net.add(gluon.nn.Dense(512, activation='relu'))
 	net.add(gluon.nn.Dense(10))
 net.initialize()
 
