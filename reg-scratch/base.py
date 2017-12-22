@@ -21,7 +21,6 @@ true_b = 0.05
 x = nd.random.normal(shape=(num_train+num_test, num_inputs))
 y = nd.dot(x, true_w)
 y += 0.01*nd.random.normal(shape=y.shape)
-
 x_train, x_test = x[:num_train, :], x[num_train:, :]
 y_train, y_test = y[:num_train], y[num_train:]
 
@@ -72,12 +71,12 @@ def train(lambd):
                     output, label) + lambd * L2_penalty(*params)
             loss.backward()
             sgd(params, learning_rate, batch_size)
-        train_loss.append(test(net, params, X_train, y_train))
-        test_loss.append(test(net, params, X_test, y_test))
+        train_loss.append(test(net, params, x_train, y_train))
+        test_loss.append(test(net, params, x_test, y_test))
     plt.plot(train_loss)
     plt.plot(test_loss)
     plt.legend(['train', 'test'])
     plt.show()
-    return 'learned w[:10]:', w[:10].T, 'learned b:', b
+    print('learned w[:10]:', w[:10].T, 'learned b:', b)
 
-train(0)
+train(5)
